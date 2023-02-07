@@ -1,29 +1,40 @@
 import { Injectable } from '@angular/core';
 import {
+  HttpErrorResponse,
   HttpEvent,
-  HttpRequest,
   HttpHandler,
   HttpInterceptor,
-  HttpErrorResponse,
+  HttpRequest,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
-
-//retry: retries an action certain no. of time before throwing an error
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
-export class InterceptorExampleInterceptor implements HttpInterceptor {
+export class ErrorCatchingInterceptor implements HttpInterceptor {
+  constructor() {}
+
   intercept(
-    request: HttpRequest<any>,
+    request: HttpRequest<unknown>,
     next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  ): Observable<HttpEvent<unknown>> {
+    console.log('Passed through the interceptor in request');
+
     return next.handle(request).pipe(
-      retry(1),
+      map((res) => {
+        console.log('Passed through the interceptor in response');
+        return res;
+      }),
       catchError((error: HttpErrorResponse) => {
-        if (error.status === 401) {
+        let errorMsg = '';
+        if (error.error instanceof ErrorEvent) {
+          console.log('This is client side error');
+          errorMsg = `Error: ${error.error.message}`;
         } else {
-          return throwError(() => error);
+          console.log('This is server side error');
+          errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
         }
+        console.log(errorMsg);
+        return throwError(errorMsg);
       })
     );
   }

@@ -15,6 +15,8 @@ export class AppComponent {
   }
   //serverside
   throwHttpError() {
-    this.http.get('error-handeling').subscribe();
+    this.http.get('error-handling').subscribe((res) => {
+      console.log(res);
+    });
   }
 }

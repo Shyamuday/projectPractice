@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { InterceptorExampleInterceptor } from './error.interceptor';
+import { ErrorCatchingInterceptor } from './error.interceptor';
 import { GlobalErrorHandler } from './global-error-handler';
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +21,7 @@ import { GlobalErrorHandler } from './global-error-handler';
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: InterceptorExampleInterceptor,
+      useClass: ErrorCatchingInterceptor,
       multi: true,
     },
   ],
