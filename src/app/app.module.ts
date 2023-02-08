@@ -15,7 +15,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { GlobalErrorComponent } from './global-error/global-error.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormArrayComponent } from './form-array/form-array.component';
 @NgModule({
   declarations: [
@@ -36,6 +36,7 @@ import { FormArrayComponent } from './form-array/form-array.component';
     MatProgressSpinnerModule,
     MatToolbarModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
