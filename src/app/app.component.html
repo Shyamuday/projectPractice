@@ -1,4 +1,18 @@
-<div style="margin: 40px">
-  <button (click)="throwError()">Error</button>
-  <button (click)="throwHttpError()">HTTP</button>
+<div class="container">
+  <div>
+    <h3>Select Task:-</h3>
+  </div>
+  <div>
+    <p routerLink="table">table</p>
+  </div>
+  <div>
+    <p routerLink="error">Error</p>
+  </div>
+  <div>
+    <p routerLink="reactiveForm">ReactiveForms</p>
+  </div>
+  <div>
+    <p routerLink="formArray">FormArray</p>
+  </div>
 </div>
+<router-outlet></router-outlet>

@@ -1,0 +1,17 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <input type="text" formControlName="name" placeholder="Enter your name" />
+  <div
+    class="alert alert-danger"
+    *ngIf="name?.invalid && (name?.touched || name?.dirty)"
+  >
+    <div *ngIf="name?.errors?.['required']">Please enter name</div>
+  </div>
+  <input type="text" formControlName="email" placeholder="Enter your email" />
+  <div
+    class="alert alert-danger"
+    *ngIf="email?.invalid && (email?.touched || email?.dirty)"
+  >
+    <div *ngIf="email?.errors?.['required']">Please enter email</div>
+  </div>
+  <button type="submit" [disabled]="!profileForm.valid">Save</button>
+</form>

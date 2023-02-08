@@ -10,13 +10,4 @@ export class AppComponent {
   title = 'proPractice';
 
   constructor(private http: HttpClient) {}
-  throwError() {
-    throw new Error('You Got An Error!!!');
-  }
-  //serverside
-  throwHttpError() {
-    this.http.get('error-handling').subscribe((res) => {
-      console.log(res);
-    });
-  }
 }
