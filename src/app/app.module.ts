@@ -17,6 +17,7 @@ import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { GlobalErrorComponent } from './global-error/global-error.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormArrayComponent } from './form-array/form-array.component';
+import { BuilderFormArrayComponent } from './builder-form-array/builder-form-array.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +25,7 @@ import { FormArrayComponent } from './form-array/form-array.component';
     ReactiveFormComponent,
     GlobalErrorComponent,
     FormArrayComponent,
+    BuilderFormArrayComponent,
   ],
   imports: [
     BrowserModule,

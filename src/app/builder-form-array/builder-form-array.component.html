@@ -1,0 +1,151 @@
+<div class="container">
+  <legend>Job portal</legend>
+  <div class="row">
+    <div>
+      <form [formGroup]="jobForm" (ngSubmit)="save()">
+        <div>
+          <label>First Name</label>
+          <input
+            type="text"
+            placeholder="Enter your first name"
+            formControlName="firstName"
+          />
+          <div
+            *ngIf="
+              firstname?.invalid && (firstname?.touched || firstname?.dirty)
+            "
+          >
+            <div *ngIf="firstname?.errors?.['required']"></div>
+          </div>
+        </div>
+        <div>
+          <label>Last Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="txtname"
+            placeholder="Enter your last name"
+            formControlName="lastName"
+          />
+        </div>
+        <div formGroupName="contacts">
+          <div class="row">
+            <div>
+              <div>
+                <label>Prefered contact Type</label>
+                <select formControlName="contactType">
+                  <option value="-1">-Select-</option>
+                  <option value="email">Email Id</option>
+                  <option value="phone">Mobile No</option>
+                </select>
+                <div
+                  class="alert alert-danger"
+                  *ngIf="
+                    contactType?.invalid &&
+                    (contactType?.touched || contactType?.dirty)
+                  "
+                >
+                  <div
+                    class=""
+                    *ngIf="contactType?.errors?.['emailOrPhoneRequired']"
+                  >
+                    Email Or Mobile Must Be Selected
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <div>
+                <label>Email</label>
+                <input
+                  type="email"
+                  id="txtemail"
+                  placeholder="Enter your last email"
+                  formControlName="email"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <div>
+                <label>Mobile no</label>
+                <input
+                  type="number"
+                  id="number"
+                  placeholder="Enter your Mobile no"
+                  formControlName="phone"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div formArrayName="skills">
+          <div class="row">
+            <div>
+              <button type="button" (click)="addSkillFormGroup()">Skill</button>
+            </div>
+          </div>
+          <ng-container
+            *ngFor="let skillFrom of skillForms.controls; let i = index"
+          >
+            <div class="row" [formGroupName]="i">
+              <div>
+                <div>
+                  <label [for]="'txtprogramminglanguage' + i" class="form-label"
+                    >Programming Language</label
+                  >
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    [id]="'txtprogramminglanguage' + i"
+                    placeholder=" Programming language"
+                    formControlName="programminglanguage"
+                  />
+                  <div
+                    *ngIf="
+                      getProgrammingLang(i)?.invalid &&
+                      (getProgrammingLang(i)?.touched ||
+                        getProgrammingLang(i)?.dirty)
+                    "
+                  >
+                    <div *ngIf="getProgrammingLang(i)?.errors?.['required']">
+                      Must enter Programming Languages
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div>
+                  <label [for]="'txtExperience' + i">Experience</label>
+                  <input
+                    type="text"
+                    [id]="'txtExperience' + i"
+                    placeholder="Experience"
+                    formControlName="experience"
+                  />
+                </div>
+              </div>
+              <div>
+                <button type="button" (click)="removeskillformGroup(i)">
+                  Delete
+                </button>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+        <button type="submit">Submit</button>&nbsp;
+        <button type="submit" (click)="patchValue()">PatchValue</button>
+      </form>
+    </div>
+    <div>
+      <div style="position: fixed">
+        {{ preview }}
+      </div>
+    </div>
+  </div>
+</div>
